@@ -126,9 +126,9 @@ class H(BaseHTTPRequestHandler):
         if p.path == "/api/lead":
             cid = data.get("email") or data.get("client_id") or "anon"
             lang = (data.get("language") or "python").lower()
-            if lang not in ("python", "cpp", "c++", "lua", "js", "ts", "build", "luahub"):
+            if lang not in ("python", "cpp", "c++", "lua", "js", "ts", "build", "luahub", "winapi"):
                 lang = "python"
-            price = "29 EUR" if lang in ("cpp", "c++", "build") else "19 EUR"
+            price = "29 EUR" if lang in ("cpp", "c++", "build", "winapi") else "19 EUR"
             add_lead(cid, data.get("email", ""), data.get("repo", ""), data.get("message", ""), language=lang)
             self._send(200, {"ok": True, "client_id": cid, "language": lang, "price": price,
                              "message": f"Zgłoszenie przyjęte. Audyt ({lang}) — {price}."})
