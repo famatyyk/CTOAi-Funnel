@@ -65,6 +65,7 @@
   .pcard p{font-size:14px;color:var(--muted);margin:0 0 16px;flex:1;}
   .pcard .pfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
   .pcard .ptag{font-size:14px;font-weight:590;color:var(--text);}
+  .pcard .ptag.free{color:#3ddc84;background:rgba(61,220,132,.12);padding:2px 8px;border-radius:999px;}
   .pcard .plink{font-size:13px;font-weight:510;color:var(--accent);}
   .pcard .plink:hover{color:var(--hover);}
 
@@ -180,6 +181,12 @@
       <p>GitHub Action: audyt C++/Lua/Python na każdym PR. Annotation `::error` dla HIGH, opcjonalny fail. Reuse Project Doctor.</p>
       <div class="pfoot"><span class="ptag">29 €</span><a class="plink" href="https://github.com/famatyyk/CTOAi-DoctorCI" target="_blank">Repo →</a></div>
     </div>
+    <div class="pcard">
+      <div class="tag">OPEN SOURCE</div>
+      <h3>CTOAi-Lint</h3>
+      <p>Darmowy CLI-linter C++/Lua/Python (read-only). Demo silnika Doctora. `pip install ctoai-lint`.</p>
+      <div class="pfoot"><span class="ptag free">FREE</span><a class="plink" href="https://github.com/famatyyk/CTOAi-Lint" target="_blank">Repo →</a></div>
+    </div>
   </div>
 </section>
 
@@ -203,6 +210,7 @@
           <option value="luahub">Lua Script Hub (19 €)</option>
           <option value="js">JavaScript (19 €)</option>
           <option value="ts">TypeScript (19 €)</option>
+          <option value="lint">CTOAi-Lint (FREE)</option>
         </select>
       </div>
       <div class="full"><label>Wiadomość</label><textarea id="leadmsg" rows="2" placeholder="Opisz co chcesz audytować..."></textarea></div>
