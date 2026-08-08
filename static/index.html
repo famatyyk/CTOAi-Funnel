@@ -3,40 +3,93 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Project Doctor — audyt repo Python/AI</title>
+<title>CTOAi Tools — audyty i narzędzia C++ / Lua / Windows</title>
 <style>
-  :root { --bg:#0d1117; --card:#161b22; --accent:#2ea043; --text:#e6edf3; --muted:#8b949e; }
+  :root { --bg:#0d1117; --card:#161b22; --accent:#2ea043; --accent2:#1f6feb; --text:#e6edf3; --muted:#8b949e; }
   * { box-sizing: border-box; }
   body { margin:0; font-family:system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); }
-  .wrap { max-width:760px; margin:0 auto; padding:32px 20px; }
+  .wrap { max-width:980px; margin:0 auto; padding:32px 20px; }
   .card { background:var(--card); border:1px solid #30363d; border-radius:12px; padding:24px; margin-bottom:20px; }
-  h1 { margin:0 0 8px; font-size:26px; }
-  .price { color:var(--accent); font-weight:700; font-size:20px; }
+  h1 { margin:0 0 8px; font-size:28px; }
+  .price { color:var(--accent); font-weight:700; font-size:18px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+  .pcard { background:var(--card); border:1px solid #30363d; border-radius:12px; padding:16px; display:flex; flex-direction:column; }
+  .pcard h3 { margin:0 0 6px; font-size:16px; }
+  .pcard p { color:var(--muted); font-size:13px; margin:0 0 10px; flex:1; }
+  .pcard .ptag { color:var(--accent); font-weight:700; font-size:14px; }
+  .pcard a { margin-top:8px; background:var(--accent2); color:#fff; text-decoration:none; text-align:center; padding:8px; border-radius:8px; font-size:13px; font-weight:600; }
   label { display:block; font-size:13px; color:var(--muted); margin:12px 0 4px; }
-  input, textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #30363d; background:#0d1117; color:var(--text); }
+  input, textarea, select { width:100%; padding:10px; border-radius:8px; border:1px solid #30363d; background:#0d1117; color:var(--text); }
   button { margin-top:14px; background:var(--accent); color:#fff; border:0; padding:12px 18px; border-radius:8px; cursor:pointer; font-weight:600; }
-  #chat { height:260px; overflow-y:auto; background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:12px; margin-bottom:10px; }
+  #chat { height:240px; overflow-y:auto; background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:12px; margin-bottom:10px; }
   .msg { margin:6px 0; padding:8px 12px; border-radius:10px; max-width:80%; }
   .u { background:#1f6feb; margin-left:auto; }
   .b { background:#21262d; }
   .hot { background:#3d1d1d; border:1px solid #f85149; padding:12px; border-radius:8px; margin-top:10px; }
   .muted { color:var(--muted); font-size:13px; }
+  .sec { font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:24px 0 10px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="card">
-    <h1>Project Doctor</h1>
-    <p class="muted">Statyczny audyt Twojego repozytorium Python / C++ / Lua / JS / TS. Raport MD + JSON w 24–48h.</p>
-    <p class="price">od 19 € · C++ / Build od 29 €</p>
-    <p>Co dostajesz: wynik Project Health 0–100, priorytety naprawy, przegląd testów/CI/sekretów, 5 kroków naprawczych.</p>
-  </div>
 
   <div class="card">
-    <h3>Zostaw repo do audytu</h3>
+    <h1>CTOAi Tools</h1>
+    <p class="muted">Audyty kodu i narzędzia C++ / Lua / Windows — statyczne, legalne, bez ingerencji w obce procesy.</p>
+    <p class="price">Audyty od 19 € · C++ / Build / WinAPI / ACLab / MemScan od 29 €</p>
+  </div>
+
+  <div class="sec">Produkty</div>
+  <div class="grid">
+    <div class="pcard">
+      <h3>Project Doctor (audyt)</h3>
+      <p>Statyczny audyt Python / C++ / Lua / JS / TS. Raport Health 0–100 + plan naprawy.</p>
+      <span class="ptag">od 19 €</span>
+      <a href="#audit">Zleć audyt →</a>
+    </div>
+    <div class="pcard">
+      <h3>Lua Script Hub</h3>
+      <p>Gotowe, bezpieczne skrypty Lua dla modderów (love2d / GMod / Factorio). Bez load/os.execute.</p>
+      <span class="ptag">19 €</span>
+      <a href="https://github.com/famatyyk/CTOAi-LuaHub" target="_blank">Zobacz repozytorium →</a>
+    </div>
+    <div class="pcard">
+      <h3>WinAPI Toolkit</h3>
+      <p>Legalna automatyzacja Windows przez Win32 API (C++). Read-only diagnostyka okien.</p>
+      <span class="ptag">29 €</span>
+      <a href="https://github.com/famatyyk/CTOAi-WinToolkit" target="_blank">Zobacz repozytorium →</a>
+    </div>
+    <div class="pcard">
+      <h3>CTF Pack</h3>
+      <p>Generator edukacyjnych zadań RE/CTF (hidden-string, code-quiz). Bez malware.</p>
+      <span class="ptag">19 €</span>
+      <a href="https://github.com/famatyyk/CTOAi-CTFGen" target="_blank">Zobacz repozytorium →</a>
+    </div>
+    <div class="pcard">
+      <h3>Anti-Cheat Lab</h3>
+      <p>Detekcja sygnatur cheatów (read-only). TYLKO wykrywanie — brak bypassu.</p>
+      <span class="ptag">29 €</span>
+      <a href="https://github.com/famatyyk/CTOAi-ACLab" target="_blank">Zobacz repozytorium →</a>
+    </div>
+    <div class="pcard">
+      <h3>Memory Scanner</h3>
+      <p>Skaner wzorców w WASNEJ pamięci (debug-tool C++). Read-only, brak obcych proc.</p>
+      <span class="ptag">29 €</span>
+      <a href="https://github.com/famatyyk/CTOAi-MemScan" target="_blank">Zobacz repozytorium →</a>
+    </div>
+    <div class="pcard">
+      <h3>Game Mod Audit</h3>
+      <p>Statyczny audyt modów (Factorio / MC). Manifest + ryzykowne wzorce Lua.</p>
+      <span class="ptag">19 €</span>
+      <a href="https://github.com/famatyyk/CTOAi-ModAudit" target="_blank">Zobacz repozytorium →</a>
+    </div>
+  </div>
+
+  <div class="card" id="audit">
+    <h3>Zleć audyt</h3>
     <label>Email</label><input id="email" placeholder="ty@firma.com">
     <label>Link do repo (lub ZIP)</label><input id="repo" placeholder="https://github.com/...">
-    <label>Język audytu</label>
+    <label>Kategoria</label>
     <select id="lang">
       <option value="python">Python (19 €)</option>
       <option value="cpp">C++ (29 €)</option>
@@ -60,6 +113,7 @@
     <input id="chatinput" placeholder="Napisz wiadomość..." onkeydown="if(event.key==='Enter')sendChat()">
     <button onclick="sendChat()">Wyślij</button>
   </div>
+
 </div>
 
 <script>
@@ -79,7 +133,7 @@ async function sendChat(){
   addMsg(j.reply,'b');
   if(j.intent && j.contact){ const h=document.createElement('div'); h.className='hot'; h.innerHTML='<b>Kontakt bezpośredni:</b> '+j.contact.email+'<br><span class="muted">'+j.contact.note+'</span>'; document.getElementById('chat').appendChild(h); }
 }
-addMsg('Cześć! Project Doctor sprawdzi Twoje repo i da plan naprawy. O co chcesz zapytać?','b');
+addMsg('Cześć! CTOAi Tools — audyty i narzędzia C++/Lua/Windows. O co chcesz zapytać?','b');
 </script>
 </body>
 </html>
