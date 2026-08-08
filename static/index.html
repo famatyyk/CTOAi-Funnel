@@ -4,117 +4,221 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CTOAi Tools — audyty i narzędzia C++ / Lua / Windows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;590&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#0d1117; --card:#161b22; --accent:#2ea043; --accent2:#1f6feb; --text:#e6edf3; --muted:#8b949e; }
-  * { box-sizing: border-box; }
-  body { margin:0; font-family:system-ui,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); }
-  .wrap { max-width:980px; margin:0 auto; padding:32px 20px; }
-  .card { background:var(--card); border:1px solid #30363d; border-radius:12px; padding:24px; margin-bottom:20px; }
-  h1 { margin:0 0 8px; font-size:28px; }
-  .price { color:var(--accent); font-weight:700; font-size:18px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
-  .pcard { background:var(--card); border:1px solid #30363d; border-radius:12px; padding:16px; display:flex; flex-direction:column; }
-  .pcard h3 { margin:0 0 6px; font-size:16px; }
-  .pcard p { color:var(--muted); font-size:13px; margin:0 0 10px; flex:1; }
-  .pcard .ptag { color:var(--accent); font-weight:700; font-size:14px; }
-  .pcard a { margin-top:8px; background:var(--accent2); color:#fff; text-decoration:none; text-align:center; padding:8px; border-radius:8px; font-size:13px; font-weight:600; }
-  label { display:block; font-size:13px; color:var(--muted); margin:12px 0 4px; }
-  input, textarea, select { width:100%; padding:10px; border-radius:8px; border:1px solid #30363d; background:#0d1117; color:var(--text); }
-  button { margin-top:14px; background:var(--accent); color:#fff; border:0; padding:12px 18px; border-radius:8px; cursor:pointer; font-weight:600; }
-  #chat { height:240px; overflow-y:auto; background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:12px; margin-bottom:10px; }
-  .msg { margin:6px 0; padding:8px 12px; border-radius:10px; max-width:80%; }
-  .u { background:#1f6feb; margin-left:auto; }
-  .b { background:#21262d; }
-  .hot { background:#3d1d1d; border:1px solid #f85149; padding:12px; border-radius:8px; margin-top:10px; }
-  .muted { color:var(--muted); font-size:13px; }
-  .sec { font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:24px 0 10px; }
+  :root{
+    --bg:#08090a; --panel:#0f1011; --surface:#191a1b; --elev:#23252a;
+    --text:#f7f8f8; --text2:#d0d6e0; --muted:#8a8f98; --quat:#62666d;
+    --brand:#5e6ad2; --accent:#7170ff; --hover:#828fff; --green:#10b981;
+    --border:rgba(255,255,255,0.08); --border-sub:rgba(255,255,255,0.05);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    font-feature-settings:'cv01','ss03';background:var(--bg);color:var(--text2);
+    -webkit-font-smoothing:antialiased;line-height:1.5;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  a{color:var(--accent);text-decoration:none;}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;background:rgba(8,9,10,0.8);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border-sub);}
+  .nav-in{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-weight:590;font-size:16px;color:var(--text);letter-spacing:-0.24px;display:flex;align-items:center;gap:9px;}
+  .logo .dot{width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,var(--brand),var(--accent));}
+  .nav-links{display:flex;gap:26px;font-size:13px;font-weight:510;color:var(--text2);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{background:var(--brand);color:#fff;padding:8px 15px;border-radius:6px;font-size:13px;font-weight:510;
+    border:1px solid transparent;transition:.15s;}
+  .nav-cta:hover{background:var(--hover);}
+
+  /* hero */
+  .hero{padding:96px 0 64px;text-align:center;}
+  .eyebrow{display:inline-block;font-size:12px;font-weight:510;color:var(--text2);
+    border:1px solid var(--border);border-radius:9999px;padding:4px 12px;margin-bottom:22px;letter-spacing:0.02em;}
+  .hero h1{font-size:56px;line-height:1.02;font-weight:510;letter-spacing:-1.4px;color:var(--text);margin:0 0 18px;}
+  .hero p{font-size:18px;font-weight:400;color:var(--muted);max-width:620px;margin:0 auto 30px;}
+  .hero-cta{display:flex;gap:12px;justify-content:center;}
+  .btn-primary{background:var(--brand);color:#fff;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:510;
+    border:1px solid transparent;transition:.15s;cursor:pointer;}
+  .btn-primary:hover{background:var(--hover);}
+  .btn-ghost{background:rgba(255,255,255,0.02);color:var(--text);padding:11px 20px;border-radius:8px;font-size:14px;font-weight:510;
+    border:1px solid var(--border);transition:.15s;cursor:pointer;}
+  .btn-ghost:hover{background:rgba(255,255,255,0.05);}
+  .price-line{margin-top:22px;font-size:13px;color:var(--quat);font-family:'JetBrains Mono',monospace;}
+
+  /* sections */
+  .sec{padding:56px 0;}
+  .sec-head{margin-bottom:32px;}
+  .sec-head h2{font-size:32px;font-weight:510;letter-spacing:-0.7px;color:var(--text);margin:0 0 8px;}
+  .sec-head p{font-size:15px;color:var(--muted);margin:0;}
+
+  /* product grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .pcard{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:22px;
+    transition:.18s;display:flex;flex-direction:column;min-height:180px;}
+  .pcard:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.14);transform:translateY(-2px);}
+  .pcard .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--quat);margin-bottom:12px;letter-spacing:0.04em;}
+  .pcard h3{font-size:17px;font-weight:590;letter-spacing:-0.24px;color:var(--text);margin:0 0 8px;}
+  .pcard p{font-size:14px;color:var(--muted);margin:0 0 16px;flex:1;}
+  .pcard .pfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
+  .pcard .ptag{font-size:14px;font-weight:590;color:var(--text);}
+  .pcard .plink{font-size:13px;font-weight:510;color:var(--accent);}
+  .pcard .plink:hover{color:var(--hover);}
+
+  /* audit form */
+  .audit{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:32px;}
+  .audit h3{font-size:22px;font-weight:510;letter-spacing:-0.5px;color:var(--text);margin:0 0 20px;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  label{display:block;font-size:12px;font-weight:510;color:var(--muted);margin:0 0 6px;letter-spacing:0.02em;}
+  input,textarea,select{width:100%;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;
+    padding:11px 13px;color:var(--text2);font-family:inherit;font-size:14px;transition:.15s;}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,0.04);}
+  select{appearance:none;cursor:pointer;}
+  .full{grid-column:1 / -1;}
+  .submit{background:var(--brand);color:#fff;border:1px solid transparent;padding:12px 22px;border-radius:8px;
+    font-size:14px;font-weight:510;cursor:pointer;transition:.15s;margin-top:4px;}
+  .submit:hover{background:var(--hover);}
+
+  /* chat */
+  .chat-box{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:24px;}
+  .chat-box h3{font-size:20px;font-weight:510;color:var(--text);margin:0 0 14px;letter-spacing:-0.4px;}
+  #chat{height:220px;overflow-y:auto;background:rgba(0,0,0,0.25);border:1px solid var(--border-sub);border-radius:10px;
+    padding:14px;margin-bottom:12px;}
+  .msg{margin:6px 0;padding:9px 13px;border-radius:10px;max-width:82%;font-size:14px;line-height:1.4;}
+  .u{background:var(--brand);color:#fff;margin-left:auto;}
+  .b{background:var(--surface);color:var(--text2);}
+  .hot{background:rgba(248,81,73,0.12);border:1px solid #f85149;border-radius:8px;padding:11px;margin-top:10px;font-size:13px;color:var(--text2);}
+  .chat-row{display:flex;gap:10px;}
+  .chat-row input{flex:1;}
+
+  footer{border-top:1px solid var(--border-sub);padding:28px 0;margin-top:40px;font-size:13px;color:var(--quat);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media(max-width:880px){.grid{grid-template-columns:1fr 1fr;}.form-grid{grid-template-columns:1fr;}.hero h1{font-size:40px;}.nav-links{display:none;}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr;}.hero h1{font-size:34px;}}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="card">
-    <h1>CTOAi Tools</h1>
-    <p class="muted">Audyty kodu i narzędzia C++ / Lua / Windows — statyczne, legalne, bez ingerencji w obce procesy.</p>
-    <p class="price">Audyty od 19 € · C++ / Build / WinAPI / ACLab / MemScan od 29 €</p>
+<nav>
+  <div class="nav-in">
+    <div class="logo"><span class="dot"></span>CTOAi Tools</div>
+    <div class="nav-links">
+      <a href="#produkty">Produkty</a>
+      <a href="#audyt">Audyt</a>
+      <a href="#czat">Kontakt</a>
+    </div>
+    <a class="nav-cta" href="#audyt">Zleć audyt</a>
   </div>
+</nav>
 
-  <div class="sec">Produkty</div>
+<section class="hero wrap">
+  <span class="eyebrow">Statyczne audyty · Legalne · Brak ingerencji w obce procesy</span>
+  <h1>Narzędzia C++ / Lua / Windows,<br>które wykrywają zanim wybuchnie.</h1>
+  <p>Audyty kodu i debug-tooly dla developerów i modderów. Od reverse-engineering edukacyjnego po detekcję cheatów — wszystko read-only, w Twoim środowisku.</p>
+  <div class="hero-cta">
+    <a class="btn-primary" href="#audyt">Zleć audyt</a>
+    <a class="btn-ghost" href="#produkty">Zobacz produkty</a>
+  </div>
+  <div class="price-line">audyty od 19 € · C++ / Build / WinAPI / ACLab / MemScan od 29 €</div>
+</section>
+
+<section class="sec wrap" id="produkty">
+  <div class="sec-head">
+    <h2>Produkty</h2>
+    <p>Siedem niezależnych narzędzi. Każde z własnym repozytorium i ceną.</p>
+  </div>
   <div class="grid">
     <div class="pcard">
-      <h3>Project Doctor (audyt)</h3>
-      <p>Statyczny audyt Python / C++ / Lua / JS / TS. Raport Health 0–100 + plan naprawy.</p>
-      <span class="ptag">od 19 €</span>
-      <a href="#audit">Zleć audyt →</a>
+      <div class="tag">AUDYT</div>
+      <h3>Project Doctor</h3>
+      <p>Statyczny audyt Python / C++ / Lua / JS / TS. Raport Health 0–100 + plan naprawy w 24–48h.</p>
+      <div class="pfoot"><span class="ptag">od 19 €</span><a class="plink" href="#audyt">Zleć →</a></div>
     </div>
     <div class="pcard">
+      <div class="tag">LUA</div>
       <h3>Lua Script Hub</h3>
       <p>Gotowe, bezpieczne skrypty Lua dla modderów (love2d / GMod / Factorio). Bez load/os.execute.</p>
-      <span class="ptag">19 €</span>
-      <a href="https://github.com/famatyyk/CTOAi-LuaHub" target="_blank">Zobacz repozytorium →</a>
+      <div class="pfoot"><span class="ptag">19 €</span><a class="plink" href="https://github.com/famatyyk/CTOAi-LuaHub" target="_blank">Repo →</a></div>
     </div>
     <div class="pcard">
+      <div class="tag">C++ / WIN32</div>
       <h3>WinAPI Toolkit</h3>
       <p>Legalna automatyzacja Windows przez Win32 API (C++). Read-only diagnostyka okien.</p>
-      <span class="ptag">29 €</span>
-      <a href="https://github.com/famatyyk/CTOAi-WinToolkit" target="_blank">Zobacz repozytorium →</a>
+      <div class="pfoot"><span class="ptag">29 €</span><a class="plink" href="https://github.com/famatyyk/CTOAi-WinToolkit" target="_blank">Repo →</a></div>
     </div>
     <div class="pcard">
+      <div class="tag">EDUKACJA / RE</div>
       <h3>CTF Pack</h3>
       <p>Generator edukacyjnych zadań RE/CTF (hidden-string, code-quiz). Bez malware.</p>
-      <span class="ptag">19 €</span>
-      <a href="https://github.com/famatyyk/CTOAi-CTFGen" target="_blank">Zobacz repozytorium →</a>
+      <div class="pfoot"><span class="ptag">19 €</span><a class="plink" href="https://github.com/famatyyk/CTOAi-CTFGen" target="_blank">Repo →</a></div>
     </div>
     <div class="pcard">
+      <div class="tag">SECURITY</div>
       <h3>Anti-Cheat Lab</h3>
-      <p>Detekcja sygnatur cheatów (read-only). TYLKO wykrywanie — brak bypassu.</p>
-      <span class="ptag">29 €</span>
-      <a href="https://github.com/famatyyk/CTOAi-ACLab" target="_blank">Zobacz repozytorium →</a>
+      <p>Detekcja sygnatur cheatów (read-only). TYLKO wykrywanie — brak bypassu anti-cheat.</p>
+      <div class="pfoot"><span class="ptag">29 €</span><a class="plink" href="https://github.com/famatyyk/CTOAi-ACLab" target="_blank">Repo →</a></div>
     </div>
     <div class="pcard">
+      <div class="tag">C++ / DEBUG</div>
       <h3>Memory Scanner</h3>
-      <p>Skaner wzorców w WASNEJ pamięci (debug-tool C++). Read-only, brak obcych proc.</p>
-      <span class="ptag">29 €</span>
-      <a href="https://github.com/famatyyk/CTOAi-MemScan" target="_blank">Zobacz repozytorium →</a>
+      <p>Skaner wzorców w WASNEJ pamięci (debug-tool C++). Read-only, brak obcych procesów.</p>
+      <div class="pfoot"><span class="ptag">29 €</span><a class="plink" href="https://github.com/famatyyk/CTOAi-MemScan" target="_blank">Repo →</a></div>
     </div>
-    <div class="pcard">
+    <div class="pcard" style="grid-column:1 / -1;">
+      <div class="tag">MODDING</div>
       <h3>Game Mod Audit</h3>
-      <p>Statyczny audyt modów (Factorio / MC). Manifest + ryzykowne wzorce Lua.</p>
-      <span class="ptag">19 €</span>
-      <a href="https://github.com/famatyyk/CTOAi-ModAudit" target="_blank">Zobacz repozytorium →</a>
+      <p>Statyczny audyt modów (Factorio / Minecraft). Sprawdza manifest + ryzykowne wzorce Lua (load, os.execute, socket) przed publikacją.</p>
+      <div class="pfoot"><span class="ptag">19 €</span><a class="plink" href="https://github.com/famatyyk/CTOAi-ModAudit" target="_blank">Repo →</a></div>
     </div>
   </div>
+</section>
 
-  <div class="card" id="audit">
+<section class="sec wrap" id="audyt">
+  <div class="audit">
     <h3>Zleć audyt</h3>
-    <label>Email</label><input id="email" placeholder="ty@firma.com">
-    <label>Link do repo (lub ZIP)</label><input id="repo" placeholder="https://github.com/...">
-    <label>Kategoria</label>
-    <select id="lang">
-      <option value="python">Python (19 €)</option>
-      <option value="cpp">C++ (29 €)</option>
-      <option value="build">C++ Build (29 €)</option>
-      <option value="winapi">WinAPI Toolkit (29 €)</option>
-      <option value="ctf">CTF Pack (19 €)</option>
-      <option value="acl">Anti-Cheat Lab (29 €)</option>
-      <option value="mem">Memory Scanner (29 €)</option>
-      <option value="mod">Game Mod Audit (19 €)</option>
-      <option value="luahub">Lua Script Hub (19 €)</option>
-      <option value="js">JavaScript (19 €)</option>
-      <option value="ts">TypeScript (19 €)</option>
-    </select>
-    <label>Wiadomość</label><textarea id="leadmsg" rows="2"></textarea>
-    <button onclick="sendLead()">Wyślij zgłoszenie</button>
+    <div class="form-grid">
+      <div><label>Email</label><input id="email" placeholder="ty@firma.com"></div>
+      <div><label>Link do repo (lub ZIP)</label><input id="repo" placeholder="https://github.com/..."></div>
+      <div class="full"><label>Kategoria</label>
+        <select id="lang">
+          <option value="python">Python (19 €)</option>
+          <option value="cpp">C++ (29 €)</option>
+          <option value="build">C++ Build (29 €)</option>
+          <option value="winapi">WinAPI Toolkit (29 €)</option>
+          <option value="ctf">CTF Pack (19 €)</option>
+          <option value="acl">Anti-Cheat Lab (29 €)</option>
+          <option value="mem">Memory Scanner (29 €)</option>
+          <option value="mod">Game Mod Audit (19 €)</option>
+          <option value="luahub">Lua Script Hub (19 €)</option>
+          <option value="js">JavaScript (19 €)</option>
+          <option value="ts">TypeScript (19 €)</option>
+        </select>
+      </div>
+      <div class="full"><label>Wiadomość</label><textarea id="leadmsg" rows="2" placeholder="Opisz co chcesz audytować..."></textarea></div>
+      <div class="full"><button class="submit" onclick="sendLead()">Wyślij zgłoszenie</button></div>
+    </div>
   </div>
+</section>
 
-  <div class="card">
+<section class="sec wrap" id="czat">
+  <div class="chat-box">
     <h3>Porozmawiaj z nami</h3>
     <div id="chat"></div>
-    <input id="chatinput" placeholder="Napisz wiadomość..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button onclick="sendChat()">Wyślij</button>
+    <div class="chat-row">
+      <input id="chatinput" placeholder="Napisz wiadomość..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="submit" onclick="sendChat()">Wyślij</button>
+    </div>
   </div>
+</section>
 
-</div>
+<footer class="wrap">
+  <span>© 2026 CTOAi Tools — statyczne audyty i narzędzia C++ / Lua / Windows.</span>
+  <span>Legalne · Read-only · Brak ingerencji w obce procesy</span>
+</footer>
 
 <script>
 const CID = "web-" + Math.random().toString(36).slice(2);
@@ -131,7 +235,7 @@ async function sendChat(){
   const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client_id:CID,message:t})});
   const j=await r.json();
   addMsg(j.reply,'b');
-  if(j.intent && j.contact){ const h=document.createElement('div'); h.className='hot'; h.innerHTML='<b>Kontakt bezpośredni:</b> '+j.contact.email+'<br><span class="muted">'+j.contact.note+'</span>'; document.getElementById('chat').appendChild(h); }
+  if(j.intent && j.contact){ const h=document.createElement('div'); h.className='hot'; h.innerHTML='<b>Kontakt bezpośredni:</b> '+j.contact.email+'<br><span style="color:var(--muted)">'+j.contact.note+'</span>'; document.getElementById('chat').appendChild(h); }
 }
 addMsg('Cześć! CTOAi Tools — audyty i narzędzia C++/Lua/Windows. O co chcesz zapytać?','b');
 </script>
