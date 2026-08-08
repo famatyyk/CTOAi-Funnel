@@ -2,3 +2,4 @@ leads.db
 __pycache__/
 *.pyc
 .env
+.devto_token
