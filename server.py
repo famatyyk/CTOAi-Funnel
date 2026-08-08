@@ -112,6 +112,31 @@ class H(BaseHTTPRequestHandler):
                 self._send(200, [dict(r) for r in rows])
             else:
                 self._send(403, {"error": "bad token"})
+        elif p.path == "/api/sample-report":
+            # Follow-up: przykladowy raport (realne findings z CTOAi-Project-Doctor,
+            # zademonstrowane na demo_cpp / demo_mod). Zero zaleznosci.
+            self._send(200, {
+                "ok": True,
+                "sample": True,
+                "repo": "twoje-repo (symulacja na demo_cpp)",
+                "health_score": 100,
+                "high_risk": 3,
+                "findings": [
+                    {"severity": "high", "rule": "cxx.unsafe-func",
+                     "title": "Funkcja C uznawana za niebezpieczną (strcpy/strcat/gets/scanf/sprintf)",
+                     "fix": "Użyj bezpiecznych odpowiedników (strncpy_s, snprintf) lub sprawdź rozmiar bufora."},
+                    {"severity": "high", "rule": "tests.none-discovered",
+                     "title": "Nie znaleziono testów",
+                     "fix": "Dodaj minimalny zestaw testów (pytest / Catch2) dla krytycznych ścieżek."},
+                    {"severity": "high", "rule": "docs.missing-readme",
+                     "title": "Brak głównego README",
+                     "fix": "Dodaj README.md z opisem, instalacją i przykładami użycia."},
+                    {"severity": "medium", "rule": "lua.load",
+                     "title": "Użycie load() w Lua (ryzyko dynamicznego kodu)",
+                     "fix": "Zastąp load() jawną funkcją lub waliduj źródło przed wykonaniem."}
+                ],
+                "cta": "Chcesz pełny raport dla swojego repo? Wyślij zgłoszenie poniżej."
+            })
         else:
             self._send(404, {"error": "not found"})
 

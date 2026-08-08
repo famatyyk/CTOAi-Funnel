@@ -234,7 +234,19 @@ async function sendLead(){
   const body={email:email.value, repo:repo.value, message:leadmsg.value, language:lang.value};
   const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   const j=await r.json();
-  if(j.ok) addMsg('Zgłoszenie przyjęte ('+j.language+', '+j.price+'). Porozmawiaj niżej lub czekaj na kontakt.','b');
+  if(j.ok){
+    addMsg('Zgłoszenie przyjęte ('+j.language+', '+j.price+'). Oto przykładowy raport, żebyś widział co dostaniesz:','b');
+    // Follow-up: pokaz przykladowy raport (follow-up po leadzie)
+    try{
+      const s=await fetch('/api/sample-report'); const sr=await s.json();
+      if(sr.ok){
+        const lines=['📊 Przykładowy raport (symulacja): Health '+sr.health_score+'/100, HIGH: '+sr.high_risk];
+        (sr.findings||[]).slice(0,4).forEach(f=>lines.push('• ['+f.severity.toUpperCase()+'] '+f.title));
+        lines.push(sr.cta||'');
+        addMsg(lines.join('\n'),'b');
+      }
+    }catch(e){ /* cicho */ }
+  }
 }
 async function sendChat(){
   const t=chatinput.value; if(!t) return;
