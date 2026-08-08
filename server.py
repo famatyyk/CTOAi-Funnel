@@ -126,7 +126,7 @@ class H(BaseHTTPRequestHandler):
         if p.path == "/api/lead":
             cid = data.get("email") or data.get("client_id") or "anon"
             lang = (data.get("language") or "python").lower()
-            if lang not in ("python", "cpp", "c++", "lua", "js", "ts", "build", "luahub", "winapi"):
+            if lang not in ("python", "cpp", "c++", "lua", "js", "ts", "build", "luahub", "winapi", "ctf"):
                 lang = "python"
             price = "29 EUR" if lang in ("cpp", "c++", "build", "winapi") else "19 EUR"
             add_lead(cid, data.get("email", ""), data.get("repo", ""), data.get("message", ""), language=lang)
